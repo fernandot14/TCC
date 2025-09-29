@@ -1,0 +1,103 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background-image: url('../imagens/Group\ 1\ \(1\).png'); /* Substitua pelo caminho da sua imagem */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  color: white;
+}
+
+/* Botões no canto superior direito */
+.top-buttons {
+  position: absolute;
+  top: 50px;
+  right: 70px;
+  display: flex;
+  gap: 15px;
+  z-index: 10;
+}
+
+.top-buttons button {
+  font-size: 25px;
+  padding: 8px 18px;
+  border: 2px solid #a463f2;
+  background: transparent;
+  border-radius: 20px;
+  color: #d1aaff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.top-buttons button:hover {
+  background-color: #a463f2;
+  color: white;
+}
+
+/* Conteúdo principal centralizado */
+.main-content {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px;
+}
+
+/* Logo e texto à esquerda */
+.logo-area {
+  max-width: 350px;
+}
+
+.logo-area h1 {
+  font-size: 36px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.logo-area span {
+  display: block;
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* Carrossel cinza */
+.carousel {
+  width: 60%;
+  height: 600px;
+  background-color: #ccc;
+  border-radius: 5px;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .main-content {
+    flex-direction: column;
+    justify-content: center;
+    gap: 40px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .carousel {
+    width: 100%;
+  }
+
+  .logo-area {
+    max-width: 100%;
+  }
+
+  .top-buttons {
+    right: 15px;
+    top: 15px;
+  }
+}
