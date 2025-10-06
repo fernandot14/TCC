@@ -1,0 +1,75 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+  background-image: url('../imagens/Group\ 1\ \(1\).png'); 
+  background-size: cover;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-box {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 40px;
+  border-radius: 20px;
+  width: 15%;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+}
+
+.perfil {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.perfil input {
+  margin: 0 5px;
+}
+
+button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px;
+  background-color: #a174c6;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.mensagem {
+  margin-top: 15px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.erro {
+  color: red;
+}
+
+.sucesso {
+  color: green;
+}
