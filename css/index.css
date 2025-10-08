@@ -18,7 +18,7 @@ body, html {
 /* Botões no canto superior direito */
 .top-buttons {
   position: absolute;
-  top: 50px;
+  top: 3%;
   right: 70px;
   display: flex;
   gap: 15px;

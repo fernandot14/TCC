@@ -12,7 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($nome) || empty($email) || empty($senha)) {
         $erro = "Todos os campos são obrigatórios.";
     } else {
-        // Verifica se email já existe
         $stmt = $conexao->prepare("SELECT id_usuario FROM usuario WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
@@ -21,18 +20,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($stmt->num_rows > 0) {
             $erro = "Este email já está cadastrado.";
         } else {
-            // Inserir usuário
-            $hash = password_hash($senha, PASSWORD_DEFAULT);
             $stmt = $conexao->prepare("INSERT INTO usuario (nome_usuario, email, senha, tipo) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("ssss", $nome, $email, $hash, $tipo);
+            $stmt->bind_param("ssss", $nome, $email, $senha, $tipo);
 
             if ($stmt->execute()) {
-                $sucesso = "Usuário cadastrado com sucesso!";
+                
+                header("Location: home.php"); 
+                exit();
             } else {
                 $erro = "Erro ao cadastrar usuário.";
             }
         }
-}
+    }
 }
 ?>
 
@@ -69,7 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label><input type="radio" name="perfil" value="Adm" > Adm</label>
                 </div>
 
-                <button type="submit">Cadastrar</button>
+                <a href=""><button>Cadastrar</button></a>
+
             </form>
         </div>
     </div>
