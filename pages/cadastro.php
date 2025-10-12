@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if ($stmt->execute()) {
                 
-                header("Location: home.php"); 
+                header("Location: login.php"); 
                 exit();
             } else {
                 $erro = "Erro ao cadastrar usuário.";
@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label><input type="radio" name="perfil" value="Adm" > Adm</label>
                 </div>
 
-                <a href=""><button>Cadastrar</button></a>
+                <button>Cadastrar</button>
 
             </form>
         </div>

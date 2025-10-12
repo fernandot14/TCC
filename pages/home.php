@@ -1,9 +1,11 @@
 <?php
 session_start();
-if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+
+if ($_SESSION['login'] != true) {
     header("Location: login.php");
     exit();
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +17,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 </head>
 <body>
     <?php 
-        echo "bem vindo(a): ".$_SESSION['nome_usuario'];
+        echo "<a href = 'usuario.php'>bem vindo(a)</a>: ".$_SESSION['nome_usuario'];
     ?>
 
 </body>

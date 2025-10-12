@@ -7,7 +7,7 @@
 body, html {
   height: 100%;
   font-family: Arial, sans-serif;
-  background-image: url('../imagens/Group\ 1\ \(1\).png'); /* Substitua pelo caminho da sua imagem */
+  background-image: url('../imagens/Frame\ 2.png'); /* Substitua pelo caminho da sua imagem */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -73,7 +73,7 @@ body, html {
 /* Carrossel cinza */
 .carousel {
   width: 60%;
-  height: 600px;
+  height: 70%;
   background-color: #ccc;
   border-radius: 5px;
 }

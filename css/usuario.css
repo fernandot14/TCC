@@ -1,0 +1,144 @@
+body {
+            margin: 0;
+            padding: 0;
+            background: url('../imagens/ChatGPT\ Image\ 14\ de\ set.\ de\ 2025\,\ 16_08_05.png') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: rgba(0,0,0,0.8);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+        }
+
+        #logo {
+            height: 40px;
+        }
+
+        nav a {
+            color: white;
+            margin-left: 25px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Perfil */
+        .perfil {
+            display: flex;
+            align-items: center;
+            padding: 40px 60px;
+        }
+
+        .perfil img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid #5e4a8f;
+            margin-right: 25px;
+        }
+
+        .perfil h1 {
+            font-size: 40px;
+            margin: 0;
+        }
+
+        .acoes {
+            position: absolute;
+            top: 140px;
+            right: 80px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .acoes a {
+            background: transparent;
+            color: #b58eff;
+            border: 2px solid #b58eff;
+            border-radius: 20px;
+            padding: 8px 20px;
+            text-decoration: none;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .acoes a:hover {
+            background: #b58eff;
+            color: #fff;
+        }
+
+        /* Favoritos */
+        .favoritos {
+            padding: 20px 60px;
+        }
+
+        .favoritos h2 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .favoritos-container {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+        }
+
+        .filme-card {
+            width: 120px;
+            height: 180px;
+            background: #3a2b55;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .filme-card::after {
+            content: "★";
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            color: gold;
+        }
+
+        /* Comentários */
+        .comentarios {
+            padding: 40px 60px;
+        }
+
+        .comentarios h2 {
+            font-size: 22px;
+            margin-bottom: 25px;
+        }
+
+        .comentario-box {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: #1e1a2a;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .comentario-box img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .comentario-texto {
+            background: #eee;
+            color: black;
+            border-radius: 15px;
+            padding: 10px 15px;
+            width: 80%;
+        }
+
+        .comentario-texto strong {
+            display: block;
+            color: #444;
+            margin-bottom: 5px;
+        }

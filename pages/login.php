@@ -1,6 +1,7 @@
 <?php
-require_once '../conection/conexao.php';
 session_start();
+
+require_once '../conection/conexao.php';
 
 $conexao = conecta();
 
