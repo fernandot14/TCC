@@ -1,0 +1,247 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: url('../imagens/home.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+}
+
+header {
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.search-bar {
+    position: relative;
+}
+
+.search-bar input {
+    width: 300px;
+    padding: 8px 25px 8px 40px; /* espaço à esquerda para o ícone */
+    border-radius: 20px;
+    border: 2px solid white;   /* borda branca */
+    background-color: black;   /* fundo preto */
+    color: white;              /* texto branco */
+    outline: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='white' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M15.5 14h-.79l-.28-.27a6.471 6.471 0 001.48-5.34C15.35 5.4 12.28 2.5 8.5 2.5S1.65 5.4 1.09 8.39a6.471 6.471 0 001.48 5.34l-.28.27h-.79l5 5L10 19l5.5-5zM4 8.5C4 6.02 6.02 4 8.5 4S13 6.02 13 8.5 10.98 13 8.5 13 4 10.98 4 8.5z'/></svg>");
+    background-repeat: no-repeat;
+    background-size: 18px;
+    background-position: 12px center; /* posição do ícone */
+}
+
+.search-bar input::placeholder {
+    color: #bbb;
+}
+
+.search-bar input:focus {
+    border-color: #540c8e;
+    box-shadow: 0 0 8px #540c8e;
+}
+
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo img {
+    height: 65px;           /* altura da logo */
+    width: auto;            /* mantém a proporção */
+    object-fit: contain;
+    background: transparent;
+}
+
+
+ nav a {
+    color: white;
+    margin-left: 5px;
+    text-decoration: none;
+    font-weight: bold;
+        }
+
+
+
+
+.user-icon {
+    font-size: 22px;
+}
+
+main {
+    padding: 20px 40px;
+}
+
+/* Seções */
+.top-filmes, .opinioes-criticos, .sua-review {
+    margin-top: 40px;
+}
+
+h2 {
+    margin-bottom: 15px;
+}
+
+/* Filmes do Top 5 */
+.filmes-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.filme-card {
+    background-color: rgba(40, 40, 40, 0.8);
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    width: 150px;
+}
+
+.filme-card img {
+    width: 100%;
+    height: 220px;
+    border-radius: 8px;
+}
+
+/* Críticos */
+.criticos-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.comentario-card {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: black;
+    padding: 15px;
+    border-radius: 15px;
+    width: 250px;
+    text-align: left;
+}
+
+.critics-section {
+    margin: 40px 0;
+    color: white;
+}
+
+.critics-section h2 {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.critics-container {
+    display: flex;
+    gap: 20px;
+}
+
+.critic-card {
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+    padding: 10px;
+    width: 200px;
+}
+
+.critic-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.profile-circle {
+    width: 30px;
+    height: 30px;
+    background-color: purple;
+    border-radius: 50%;
+}
+
+.star {
+    color: gold;
+    font-size: 20px;
+}
+
+.critic-text p {
+    margin: 5px 0;
+}
+
+.rating {
+    font-weight: bold;
+}
+
+
+/* Sugestões */
+.filmes-sugeridos {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.sugestao-card {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: black;
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px;
+    width: 130px;
+}
+
+.sugestao-card img {
+    width: 100%;
+    height: 180px;
+    border-radius: 10px;
+}
+
+.sugestao-card a {
+    display: inline-block;
+    margin-top: 8px;
+    text-decoration: none;
+    background-color: black;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 8px;
+}
+
+footer {
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    margin-top: 40px;
+}
+
+.redes img {
+    width: 25px;
+    margin-left: 15px;
+}
+/* Retângulos Roxos do Top 5 */
+.retangulos-top5 {
+    display: flex;
+    justify-content: space-around;
+    margin: 15px 0;
+}
+
+.retangulo {
+    background-color: #4D3B54; /* Roxo */
+    width: 150px;
+    height: 200px;
+    border-radius: 8px;
+}
+
+
+
+.retangulos-review {
+    display: flex;
+    justify-content: space-around;
+    margin: 15px 0;
+}
+
+.retangulo2 {
+    background-color: white; /* Roxo */
+    width: 150px;
+    height: 150px;
+    border-radius: 12px;
+}
+

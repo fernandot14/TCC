@@ -12,7 +12,8 @@ trailer varchar(150),
 caminho_imagem varchar(150),
 media_tomatoes decimal(10,2) NOT NULL,
 media_imbd decimal (10,2) not null,
-media_geral decimal (10,2) not null
+media_geral decimal (10,2) not null,
+sinopse varchar(500) not null
 );
 
 drop table if exists usuario;
@@ -38,5 +39,7 @@ foreign key (id_usuario) references usuario(id_usuario)
 
 select * from usuario;
 
-insert into comentario (conteudo, data_comentario, id_usuario) values ('foi muito legal', '2007-01-02', 2)
+insert into comentario (conteudo, data_comentario, id_usuario) values ('nossa, que ruim', '2007-01-03', 2);
 
+insert into filme (nome_filme, data_lancamento, genero, trailer, caminho_imagem, media_tomatoes, media_imbd, media_geral, sinopse)
+values ('star wars', '2023-05-06', 'suspense', 'trailer', 'imagem', 6, 8, 3, 'em uma galaxia muito distante')
