@@ -22,16 +22,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->bind_result($id_usuario, $nome_usuario, $senha_bd, $tipo);
             $stmt->fetch();
 
-            // Como você não está usando senha criptografada, comparação direta:
+            
             if ($senha === $senha_bd) {
-                // Inicia sessão do usuário
+                
                 session_regenerate_id(true);
                 $_SESSION['id'] = $id_usuario;
                 $_SESSION['nome_usuario'] = $nome_usuario;
                 $_SESSION['tipo'] = $tipo;
                 $_SESSION['login'] = true;
 
-                header("Location: home.php"); // página principal após login
+                header("Location: home.php"); 
                 exit();
             } else {
                 $erro = "Senha incorreta.";

@@ -2,7 +2,7 @@
 session_start();
 require_once '../conection/conexao.php';
 
-// Verifica se o usuário está logado
+
 if (!isset($_SESSION['id'])) {
     header("Location: ../login.php");
     exit;
@@ -11,7 +11,7 @@ if (!isset($_SESSION['id'])) {
 $id_usuario = $_SESSION['id'];
 $conn = conecta();
 
-// Buscar dados do usuário
+
 $sql = "SELECT nome_usuario, foto_perfil FROM usuario WHERE id_usuario = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $id_usuario);
@@ -61,8 +61,7 @@ $conn->close();
             <img src="../imagens/logo.png" id="logo" alt="Logo Movie Reviews">
         </div>
         <nav>
-            <a href="#">Adm</a>
-            <a href="#">Ajuda</a>
+            <a href="home.php">home</a>
         </nav>
     </header>
 

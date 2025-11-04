@@ -1,17 +1,8 @@
 <?php
 session_start();
+
 require_once '../conection/conexao.php';
-$conexao = conecta(); // assume que conecta() retorna link mysqli
-
-// Verifica se o usuário está logado
-if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
-    header("Location: login.php");
-    exit();
-}
-
-// Pega dados do usuário logado
-$nomeUsuario = $_SESSION['nome_usuario'];
-$tipoUsuario = $_SESSION['tipo'];
+$conexao = conecta(); 
 
 
 if (isset($_GET['busca'])) {
@@ -20,7 +11,7 @@ if (isset($_GET['busca'])) {
     if ($busca === '') {
         echo "<script>alert('Digite algo para buscar.');</script>";
     } else {
-        // Busca candidatos próximos (até 10) usando LIKE (compatível com qualquer MySQL)
+       
         $sqlBusca = "SELECT id_filme, nome_filme, data_lancamento, genero, trailer, caminho_imagem, media_tomatoes, media_imbd, media_geral, sinopse FROM filme WHERE nome_filme LIKE ? LIMIT 10";
         $like = '%' . $busca . '%';
 
@@ -30,8 +21,8 @@ if (isset($_GET['busca'])) {
             $res = mysqli_stmt_get_result($stmt);
 
             $melhor = null;
-            $melhorScore = PHP_INT_MAX; // menor distância é melhor para levenshtein
-            $melhorSimilar = -1; // higher is better for similar_text
+            $melhorScore = PHP_INT_MAX; 
+            $melhorSimilar = -1; 
 
             while ($row = mysqli_fetch_assoc($res)) {
                 $nomeBanco = $row['nome_filme'];
@@ -125,30 +116,35 @@ $sugestoes = mysqli_query($conexao, $sqlSugestoes);
 </head>
 <body>
     <header>
-        <!-- Barra de pesquisa funcional -->
-        <div class="search-bar">
-            <form method="get" action="">
-                <input 
-                    type="text" 
-                    name="busca" 
-                    placeholder="Buscar filme..." 
-                    required 
-                    onkeydown="if(event.key==='Enter'){this.form.submit();}"
-                >
-            </form>
-        </div>
+    <div class="search-bar">
+        <form method="get" action="">
+            <input 
+                type="text" 
+                name="busca" 
+                placeholder="Buscar filme..." 
+                required 
+                onkeydown="if(event.key==='Enter'){this.form.submit();}"
+            >
+        </form>
+    </div>
 
-        <div class="logo">
-            <img src="../imagens/logo.png" alt="Logo do site">
-        </div>
+    <div class="logo">
+        <img src="../imagens/logo.png" alt="Logo do site">
+    </div>
 
-        <nav>
-            <a href="#">Adm</a>
-            <a href="#">Ajuda</a>
-        </nav>
-
-        <a href="usuario.php" class="user-icon">👤</a>
-    </header>
+    <nav>
+        <?php if ($_SESSION['login']): ?>
+            <?php if ($_SESSION['tipo'] == 'ADM'): ?>
+                <a href="gerenciar_usuarios.php">ADM</a>
+            <?php endif; ?>
+            <a href="logout.php">Sair</a>
+            <a href="usuario.php" class="user-icon">👤</a>
+        <?php else: ?>
+            <a href="login.php" class="btn-login">Login</a>
+            <a href="cadastro.php" class="btn-cadastro">Cadastre-se</a>
+        <?php endif; ?>
+    </nav>
+</header>
 
     <main>
         <section class="top-filmes">

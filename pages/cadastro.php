@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome   = trim($_POST['nome']);
     $email  = trim($_POST['email']);
     $senha  = $_POST['senha'];
-    $tipo = isset($_POST['perfil']) ? $_POST['perfil'] : 'Comum';
+    $tipo = 'comum';
 
     if (empty($nome) || empty($email) || empty($senha)) {
         $erro = "Todos os campos são obrigatórios.";
@@ -62,11 +62,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <label for="senha">Senha:</label>
                 <input type="password" name="senha" id="senha" required>
-
-                <div class="perfil">
-                    <label><input type="radio" name="perfil" value="Crítico" > Crítico</label>
-                    <label><input type="radio" name="perfil" value="Adm" > Adm</label>
-                </div>
 
                 <button>Cadastrar</button>
 
