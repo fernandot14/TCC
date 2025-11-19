@@ -116,39 +116,41 @@ $sugestoes = mysqli_query($conexao, $sqlSugestoes);
 </head>
 <body>
     <header>
+    <!-- BARRA DE PESQUISA -->
     <div class="search-bar">
-        <form method="get" action="">
-            <input 
-                type="text" 
-                name="busca" 
-                placeholder="Buscar filme..." 
-                required 
-                onkeydown="if(event.key==='Enter'){this.form.submit();}"
-            >
-        </form>
+        <input type="text" placeholder="Pesquisar...">
     </div>
 
+    <!-- LOGO CENTRAL -->
     <div class="logo">
-        <img src="../imagens/logo.png" alt="Logo do site">
+        <img src="../imagens/logo.png" alt="Logo">
     </div>
 
-    <nav>
-        <?php if ($_SESSION['login']): ?>
-            <?php if ($_SESSION['tipo'] == 'ADM'): ?>
-                <a href="gerenciar_usuarios.php">ADM</a>
-            <?php endif; ?>
-            <a href="logout.php">Sair</a>
-            <a href="usuario.php" class="user-icon">👤</a>
-        <?php else: ?>
-            <a href="login.php" class="btn-login">Login</a>
-            <a href="cadastro.php" class="btn-cadastro">Cadastre-se</a>
-        <?php endif; ?>
+    <!-- MENU DIREITA: ADM | AJUDA + ÍCONE -->
+    <nav class="right-menu">
+        <a href="adm.php">Adm</a>
+        <span class="divider">|</span>
+        <a href="#">Ajuda</a>
+
+        <!-- Ícone de perfil -->
+        <a href="../pages/usuario.php" class="icon-svg">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 12c2.8 0 5-2.2 5-5s-2.2-5-5-5-5 2.2-5 5 2.2 5 5 5zm0 2c-4.4 0-8 3.6-8 8h16c0-4.4-3.6-8-8-8z"/>
+    </svg>
+</a>
+
+
     </nav>
 </header>
 
+
+  
+
+
+
     <main>
         <section class="top-filmes">
-            <h2>✨ Top 5 no Movie Reviews</h2>
+            <h2>✧ Top 5 no Movie Reviews</h2>
             <div class="retangulos-top5">
                 <div class="retangulo"></div>
                 <div class="retangulo"></div>
@@ -160,7 +162,7 @@ $sugestoes = mysqli_query($conexao, $sqlSugestoes);
         </section>
 
         <section class="opinioes-criticos">
-            <h2>✨ Opinião dos críticos</h2>
+            <h2>✧ Opinião dos críticos</h2>
             <section class="critics-section">
                 <div class="critics-container">
                     <!-- Aqui você pode iterar $comentariosCriticos se quiser -->
@@ -199,7 +201,7 @@ $sugestoes = mysqli_query($conexao, $sqlSugestoes);
         </section>
 
         <section class="sua-review">
-            <h2>✨ Dê sua review</h2>
+            <h2>✧ Dê sua review</h2>
 
             <div class="retangulos-review">
                 <div class="retangulo2"></div>

@@ -6,91 +6,99 @@ body {
     color: white;
 }
 
+/* ===== HEADER ===== */
 header {
-  background-color: rgba(0, 0, 0, 0.8);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  padding: 10px 100px; /* aumente aqui para afastar tudo */
-  height: 100px;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 10px 100px;
+    height: 100px;
 }
 
 /* ===== BARRA DE PESQUISA ===== */
 .search-bar {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-right: 80px;           /* 🔹 afasta da logo */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-right: 80px;
 }
 
 .search-bar input {
-  width: 320px;
-  padding: 8px 25px 8px 40px;
-  border-radius: 25px;
-  border: 2px solid white;
-  background-color: black;
-  color: white;
-  outline: none;
-  background-image: url("data:image/svg+xml;utf8,<svg fill='white' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M15.5 14h-.79l-.28-.27a6.471 6.471 0 001.48-5.34C15.35 5.4 12.28 2.5 8.5 2.5S1.65 5.4 1.09 8.39a6.471 6.471 0 001.48 5.34l-.28.27h-.79l5 5L10 19l5.5-5zM4 8.5C4 6.02 6.02 4 8.5 4S13 6.02 13 8.5 10.98 13 8.5 13 4 10.98 4 8.5z'/></svg>");
-  background-repeat: no-repeat;
-  background-size: 18px;
-  background-position: 12px center;
-  transition: 0.3s;
+    width: 320px;
+    padding: 8px 25px 8px 40px;
+    border-radius: 25px;
+    border: 2px solid white;
+    background-color: black;
+    color: white;
+    outline: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='white' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M15.5 14h-.79l-.28-.27a6.471 6.471 0 001.48-5.34C15.35 5.4 12.28 2.5 8.5 2.5S1.65 5.4 1.09 8.39a6.471 6.471 0 001.48 5.34l-.28.27h-.79l5 5L10 19l5.5-5zM4 8.5C4 6.02 6.02 4 8.5 4S13 6.02 13 8.5 10.98 13 8.5 13 4 10.98 4 8.5z'/></svg>");
+    background-repeat: no-repeat;
+    background-size: 18px;
+    background-position: 12px center;
+    transition: 0.3s;
 }
 
 .search-bar input::placeholder {
-  color: #bbb;
+    color: #bbb;
 }
 
 .search-bar input:focus {
-  border-color: #540c8e;
-  box-shadow: 0 0 8px #540c8e;
+    border-color: #540c8e;
+    box-shadow: 0 0 8px #540c8e;
 }
 
 /* ===== LOGO CENTRAL ===== */
 .logo {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
 }
 
 .logo img {
-  height: 70px;
-  width: auto;
-  object-fit: contain;
+    height: 70px;
+    width: auto;
+    object-fit: contain;
 }
 
-/* ===== MENU À DIREITA ===== */
-nav {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 25px;                    /* 🔹 mais espaço entre os links */
-  margin-left: 80px;            /* 🔹 afasta da logo */
+/* ===== MENU DIREITA (Adm | Ajuda | Ícone) ===== */
+.right-menu {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-left: 80px;
 }
 
-nav a {
-  color: yellow;
-  text-decoration: none;
-  font-weight: bold;
-  transition: color 0.2s ease;
+.right-menu a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
 }
 
-nav a:hover {
-  color: #bbb;
+.right-menu a:hover {
+    color: #bbb;
 }
 
-
-.user-icon {
-    font-size: 22px;
+.divider {
+    color: white;
+    font-weight: bold;
 }
 
+.profile-icon img {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: #b999d6;
+    padding: 4px;
+}
+
+/* ===== MAIN ===== */
 main {
     padding: 20px 40px;
 }
@@ -104,7 +112,7 @@ h2 {
     margin-bottom: 15px;
 }
 
-/* Filmes do Top 5 */
+/* Filmes Top 5 */
 .filmes-container {
     display: flex;
     justify-content: space-around;
@@ -191,7 +199,6 @@ h2 {
     font-weight: bold;
 }
 
-
 /* Sugestões */
 .filmes-sugeridos {
     display: flex;
@@ -224,6 +231,7 @@ h2 {
     border-radius: 8px;
 }
 
+/* Footer */
 footer {
     background-color: rgba(0, 0, 0, 0.9);
     display: flex;
@@ -237,7 +245,8 @@ footer {
     width: 25px;
     margin-left: 15px;
 }
-/* Retângulos Roxos do Top 5 */
+
+/* Top 5 */
 .retangulos-top5 {
     display: flex;
     justify-content: space-around;
@@ -245,14 +254,13 @@ footer {
 }
 
 .retangulo {
-    background-color: #4D3B54; /* Roxo */
+    background-color: #4D3B54;
     width: 150px;
     height: 200px;
     border-radius: 8px;
 }
 
-
-
+/* Reviews */
 .retangulos-review {
     display: flex;
     justify-content: space-around;
@@ -260,12 +268,13 @@ footer {
 }
 
 .retangulo2 {
-    background-color: white; /* Roxo */
+    background-color: white;
     width: 150px;
     height: 150px;
     border-radius: 12px;
 }
 
+/* Botões */
 .btn-login, .btn-cadastro {
     background-color: #540c8e;
     color: white;
@@ -281,3 +290,6 @@ footer {
     background-color: #7b2cbf;
 }
 
+.icon-svg svg {
+    cursor: pointer;
+}

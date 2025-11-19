@@ -6,7 +6,7 @@ function conecta() : mysqli
     $banco = 'mr';
     $port = 3306;
     $usuario = 'root';
-    $senha = 'F#2m44a12';
+    $senha = '';
 
     $conexao = mysqli_connect($servidor, $usuario, $senha, $banco, $port);
 
