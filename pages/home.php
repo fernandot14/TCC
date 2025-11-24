@@ -64,15 +64,6 @@ if (isset($_GET['busca'])) {
             if ($melhor !== null) {
                 // Salva todas as informações do filme em session (mantendo os campos do seu create table)
                 $_SESSION['filme_id'] = $melhor['id_filme'];
-                $_SESSION['filme_nome'] = $melhor['nome_filme'];
-                $_SESSION['filme_data_lancamento'] = $melhor['data_lancamento'];
-                $_SESSION['filme_genero'] = $melhor['genero'];
-                $_SESSION['filme_trailer'] = $melhor['trailer'];
-                $_SESSION['filme_imagem'] = $melhor['caminho_imagem'];
-                $_SESSION['filme_media_tomatoes'] = $melhor['media_tomatoes'];
-                $_SESSION['filme_media_imbd'] = $melhor['media_imbd'];
-                $_SESSION['filme_media_geral'] = $melhor['media_geral'];
-                $_SESSION['filme_sinopse'] = $melhor['sinopse'];
 
                 // Redireciona para filmes.php
                 header("Location: filmes.php");
@@ -94,14 +85,37 @@ $topFilmes = mysqli_query($conexao, $sqlTop5);
 
 // Comentários de críticos (usuários com tipo 'critico')
 $sqlCriticos = "
-SELECT u.nome_usuario, u.foto_perfil, f.nome_filme, c.conteudo, f.media_geral
-FROM comentario c
-JOIN usuario u ON c.id_usuario = u.id_usuario
-JOIN filme f ON c.id_filme = f.id_filme
-WHERE u.tipo = 'critico'
+SELECT 
+    u.nome_usuario, 
+    u.foto_perfil, 
+    f.nome_filme, 
+    f.media_geral, 
+    c.conteudo, 
+    c.data_comentario
+FROM comentario AS c
+INNER JOIN usuario AS u ON c.id_usuario = u.id_usuario
+INNER JOIN filme AS f ON c.id_filme = f.id_filme
+WHERE LOWER(TRIM(u.tipo)) = 'critico'
 ORDER BY c.data_comentario DESC
-LIMIT 3";
+LIMIT 5
+";
 $comentariosCriticos = mysqli_query($conexao, $sqlCriticos);
+
+if (!$comentariosCriticos) {
+    die("Erro ao buscar comentários: " . mysqli_error($conexao));
+}
+
+echo "<!-- Debug SQL -->\n";
+echo "<!-- SQL executada: $sqlCriticos -->\n";
+echo "<!-- Linhas encontradas: " . mysqli_num_rows($comentariosCriticos) . " -->\n";
+
+if (mysqli_num_rows($comentariosCriticos) > 0) {
+    $first = mysqli_fetch_assoc($comentariosCriticos);
+    echo "<!-- Primeiro resultado: " . htmlspecialchars(json_encode($first, JSON_UNESCAPED_UNICODE)) . " -->\n";
+    mysqli_data_seek($comentariosCriticos, 0);
+}
+
+
 
 // Sugestões de filmes
 $sqlSugestoes = "SELECT nome_filme, caminho_imagem FROM filme ORDER BY RAND() LIMIT 5";
@@ -135,7 +149,7 @@ $sugestoes = mysqli_query($conexao, $sqlSugestoes);
     <nav>
         <?php if ($_SESSION['login']): ?>
             <?php if ($_SESSION['tipo'] == 'ADM'): ?>
-                <a href="gerenciar_usuarios.php" class="btn">ADM</a>
+                <a href="adm.php" class="btn">ADM</a>
             <?php endif; ?>
             <a href="logout.php" class="btn">Sair</a>
             <a href="usuario.php" class="user-icon">👤</a>
@@ -148,7 +162,7 @@ $sugestoes = mysqli_query($conexao, $sqlSugestoes);
 
     <main>
         <section class="top-filmes">
-            <h2>✨ Top 5 no Movie Reviews</h2>
+            <h2>|  Top 5 no Movie Reviews</h2>
             <div class="retangulos-top5">
                 <div class="retangulo"></div>
                 <div class="retangulo"></div>
@@ -159,47 +173,47 @@ $sugestoes = mysqli_query($conexao, $sqlSugestoes);
 
         </section>
 
-        <section class="opinioes-criticos">
-            <h2>✨ Opinião dos críticos</h2>
-            <section class="critics-section">
-                <div class="critics-container">
-                    <!-- Aqui você pode iterar $comentariosCriticos se quiser -->
+      <section class="opinioes-criticos">
+    <h2>|  Opinião dos críticos</h2>
+    <section class="critics-section">
+        <div class="critics-container">
+            <?php if (mysqli_num_rows($comentariosCriticos) > 0): ?>
+                <?php while ($c = mysqli_fetch_assoc($comentariosCriticos)): ?>
                     <div class="critic-card">
                         <div class="critic-profile">
-                            <div class="profile-circle"></div>
-                            <div class="star">★</div>
-                        </div>
-                        <div class="critic-text">
-                            <p>Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
-                            <p class="rating">NOTA: 0.3</p>
-                        </div>
+                            <?php if (!empty($c['foto_perfil'])): ?>
+                            <img src="<?= htmlspecialchars($c['foto_perfil']) ?>" alt="Foto de <?= htmlspecialchars($c['nome_usuario']) ?>" class="profile-circle">
+                             <?php else: ?>
+                             <div class="profile-circle"></div>
+                             <?php endif; ?>
+
+                            <div class="critic-header">
+                            <span class="star">★</span>
+                                <strong class="critic-name"><?= htmlspecialchars($c['nome_usuario']) ?></strong>
+                                </div>
+                                </div>
+
+<div class="critic-text">
+    <p class="critic-film"><em><?= htmlspecialchars($c['nome_filme']) ?></em></p>
+    <p class="critic-comment"><?= htmlspecialchars($c['conteudo']) ?></p>
+    <p class="rating">Nota média: <strong><?= number_format($c['media_geral'], 1) ?></strong></p>
+    <p class="critic-date">Data: <?= date('d/m/Y', strtotime($c['data_comentario'])) ?></p>
+</div>
+
                     </div>
-                    <div class="critic-card">
-                        <div class="critic-profile">
-                            <div class="profile-circle"></div>
-                            <div class="star">★</div>
-                        </div>
-                        <div class="critic-text">
-                            <p>Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
-                            <p class="rating">NOTA: 0.1</p>
-                        </div>
-                    </div>
-                    <div class="critic-card">
-                        <div class="critic-profile">
-                            <div class="profile-circle"></div>
-                            <div class="star">★</div>
-                        </div>
-                        <div class="critic-text">
-                            <p>Lorem ipsum is simply dummy text of the printing and typesetting industry.</p>
-                            <p class="rating">NOTA: 0.1</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </section>
+                <?php endwhile; ?>
+            <?php else: ?>
+                <p>Nenhum comentário de crítico encontrado.</p>
+            <?php endif; ?>
+        </div>
+    </section>
+</section>
+
+
+
 
         <section class="sua-review">
-            <h2>✨ Dê sua review</h2>
+            <h2>|  Dê sua review</h2>
 
             <div class="retangulos-review">
                 <div class="retangulo2"></div>

@@ -60,7 +60,7 @@ $conn->close();
 
         </div>
         <div class="logo">
-            <img src="../imagens/logo.png.png" alt="Logo Movie Reviews">   
+            <img src="" alt="Logo Movie Reviews">   
         </div>
         <nav>
             <a href="home.php" class="btn">home</a>

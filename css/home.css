@@ -176,7 +176,7 @@ h2 {
 .profile-circle {
     width: 30px;
     height: 30px;
-    background-color: purple;
+    background-color: #540c8e;
     border-radius: 50%;
 }
 
@@ -247,7 +247,7 @@ footer {
 }
 
 .retangulo {
-    background-color: #4D3B54; /* Roxo */
+    background-color: #540c8e; /* Roxo */
     width: 150px;
     height: 200px;
     border-radius: 8px;
@@ -268,9 +268,47 @@ footer {
     border-radius: 12px;
 }
 
-
+.btn{
+    background-color: #540c8e;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    margin-left: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
 
 .btn-login:hover, .btn-cadastro:hover {
-    background-color: #7b2cbf;
+    background-color: #540c8e;
 }
+.critic-header {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.critic-name {
+    font-weight: bold;
+    font-size: 1rem;
+    color: black;
+}
+
+.critic-film {
+    font-size: 0.9rem;
+    color: #555;
+    margin: -5px 0 8px 0;
+}
+
+.critic-comment {
+    font-size: 1rem;
+    line-height: 1.4;
+    margin-bottom: 6px;
+}
+
+.critic-date {
+    font-size: 0.85rem;
+    color: #555;
+}
+
 
