@@ -7,24 +7,56 @@ body {
             font-family: Arial, sans-serif;
         }
 
-        header {
-            background-color: rgba(0,0,0,0.8);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 40px;
-        }
+header {
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  padding: 10px 100px;
+  height: 60px;
+  max-height: 60px;
+}
 
-        #logo {
-            height: 40px;
-        }
+.b {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-right: 80px;          
+}
 
-        nav a {
-            color: white;
-            margin-left: 25px;
-            text-decoration: none;
-            font-weight: bold;
-        }
+.logo {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.logo img {
+  width: auto;
+  object-fit: contain;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 25px;                    
+  margin-left: 80px;            
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.2s ease;
+}
+
+nav a:hover {
+  color: #bbb;
+}
 
         /* Perfil */
         .perfil {
@@ -142,3 +174,14 @@ body {
             color: #444;
             margin-bottom: 5px;
         }
+        
+.btn{
+    background-color: #540c8e;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    margin-left: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}

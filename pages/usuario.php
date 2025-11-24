@@ -56,16 +56,18 @@ $conn->close();
 
     <!-- TOPO -->
     <header>
-        <div>
-            <!-- Espaço para logo -->
-            <img src="../imagens/logo.png" id="logo" alt="Logo Movie Reviews">
+        <div class="b">
+
+        </div>
+        <div class="logo">
+            <img src="../imagens/logo.png.png" alt="Logo Movie Reviews">   
         </div>
         <nav>
-            <a href="home.php">home</a>
+            <a href="home.php" class="btn">home</a>
         </nav>
     </header>
 
-    <!-- PERFIL -->
+    
     <section class="perfil">
         <img src="<?= $foto_perfil ? $foto_perfil : '../imagens/default_user.png' ?>" alt="Foto do usuário">
         <h1><?= htmlspecialchars($nome_usuario) ?></h1>

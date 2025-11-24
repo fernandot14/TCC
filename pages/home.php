@@ -129,19 +129,19 @@ $sugestoes = mysqli_query($conexao, $sqlSugestoes);
     </div>
 
     <div class="logo">
-        <img src="../imagens/logo.png" alt="Logo do site">
+        <img src="" alt="Logo do site">
     </div>
 
     <nav>
         <?php if ($_SESSION['login']): ?>
             <?php if ($_SESSION['tipo'] == 'ADM'): ?>
-                <a href="gerenciar_usuarios.php">ADM</a>
+                <a href="gerenciar_usuarios.php" class="btn">ADM</a>
             <?php endif; ?>
-            <a href="logout.php">Sair</a>
+            <a href="logout.php" class="btn">Sair</a>
             <a href="usuario.php" class="user-icon">👤</a>
         <?php else: ?>
-            <a href="login.php" class="btn-login">Login</a>
-            <a href="cadastro.php" class="btn-cadastro">Cadastre-se</a>
+            <a href="login.php" class="btn">Login</a>
+            <a href="cadastro.php" class="btn">Cadastre-se</a>
         <?php endif; ?>
     </nav>
 </header>

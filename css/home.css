@@ -12,8 +12,8 @@ header {
   justify-content: space-between;
   align-items: center;
   position: relative;
-  padding: 10px 100px; /* aumente aqui para afastar tudo */
-  height: 100px;
+  padding: 10px 100px; 
+  height: 60px;
 }
 
 /* ===== BARRA DE PESQUISA ===== */
@@ -21,7 +21,7 @@ header {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-right: 80px;           /* 🔹 afasta da logo */
+  margin-right: 80px;          
 }
 
 .search-bar input {
@@ -48,7 +48,7 @@ header {
   box-shadow: 0 0 8px #540c8e;
 }
 
-/* ===== LOGO CENTRAL ===== */
+
 .logo {
   position: absolute;
   left: 50%;
@@ -61,22 +61,20 @@ header {
 }
 
 .logo img {
-  height: 70px;
   width: auto;
   object-fit: contain;
 }
 
-/* ===== MENU À DIREITA ===== */
 nav {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 25px;                    /* 🔹 mais espaço entre os links */
-  margin-left: 80px;            /* 🔹 afasta da logo */
+  gap: 25px;                    
+  margin-left: 80px;            
 }
 
 nav a {
-  color: yellow;
+  color: white;
   text-decoration: none;
   font-weight: bold;
   transition: color 0.2s ease;
@@ -142,8 +140,12 @@ h2 {
 }
 
 .critics-section {
+    width: 100%;
     margin: 40px 0;
     color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: end;
 }
 
 .critics-section h2 {
@@ -266,16 +268,7 @@ footer {
     border-radius: 12px;
 }
 
-.btn-login, .btn-cadastro {
-    background-color: #540c8e;
-    color: white;
-    padding: 8px 15px;
-    border-radius: 20px;
-    margin-left: 10px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s;
-}
+
 
 .btn-login:hover, .btn-cadastro:hover {
     background-color: #7b2cbf;
