@@ -167,7 +167,7 @@ $comentarios = mysqli_query($conexao, $sqlComentarios);
     <?php foreach ($comentarios as $comentario): ?>
       <div class="comentario-card">
         <div class="comentario-topo">
-          <img src="imagens/user-icon.png" alt="Usuário" class="comentario-avatar">
+          <img src="../imagens/default_user.png" alt="Usuário" class="comentario-avatar">
           <span class="comentario-estrela">⭐</span>
         </div>
         <p class="comentario-texto"><?= htmlspecialchars($comentario['conteudo']) ?></p>

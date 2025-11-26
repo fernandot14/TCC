@@ -21,13 +21,8 @@ include '../conection/conexao.php';
                 <path d="M3 10L12 3L21 10V21H14V14H10V21H3V10Z"/>
             </svg>
         </dclass=>
+        </a>
 
-        <!-- ÍCONE DE PERFIL BRANCO -->
-       <a href="../pages/usuario.php" class="icon-svg">
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 12c2.8 0 5-2.2 5-5s-2.2-5-5-5-5 2.2-5 5 2.2 5 5 5zm0 2c-4.4 0-8 3.6-8 8h16c0-4.4-3.6-8-8-8z"/>
-    </svg>
-</a>
 
     </div>
 </header>
@@ -65,13 +60,11 @@ include '../conection/conexao.php';
     </section>
 
     <section class="right-box">
-        <button onclick=\"location.href='adicionar_filme.php'\">ADICIONAR FILME</button>
-        <button onclick=\"location.href='remover_filme.php'\">REMOVER FILME</button>
+        <button onclick="location.href='adicionar_filme.php'">ADICIONAR FILME</button>
+        <button onclick="location.href='remover_filme.php'">REMOVER FILME</button>
     </section>
 
 </main>
 
 </body>
 </html>
-
-como vai voce 

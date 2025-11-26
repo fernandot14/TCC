@@ -142,9 +142,7 @@ $sugestoes = mysqli_query($conexao, $sqlSugestoes);
         </form>
     </div>
 
-    <div class="logo">
-        <img src="" alt="Logo do site">
-    </div>
+        <img src="../imagens/logo.png" alt="Logo do site" class="logo">
 
     <nav>
         <?php if ($_SESSION['login']): ?>
@@ -178,26 +176,25 @@ $sugestoes = mysqli_query($conexao, $sqlSugestoes);
     <section class="critics-section">
         <div class="critics-container">
             <?php if (mysqli_num_rows($comentariosCriticos) > 0): ?>
-                <?php while ($c = mysqli_fetch_assoc($comentariosCriticos)): ?>
-                    <div class="critic-card">
-                        <div class="critic-profile">
-                            <?php if (!empty($c['foto_perfil'])): ?>
-                            <img src="<?= htmlspecialchars($c['foto_perfil']) ?>" alt="Foto de <?= htmlspecialchars($c['nome_usuario']) ?>" class="profile-circle">
-                             <?php else: ?>
-                             <div class="profile-circle"></div>
-                             <?php endif; ?>
+            <?php while ($c = mysqli_fetch_assoc($comentariosCriticos)): ?>
+            <div class="critic-card">
+            <div class="critic-profile">
+            <?php if (!empty($c['foto_perfil'])): ?>
+            <img src="<?= htmlspecialchars($c['foto_perfil']) ?>" alt="Foto de <?= htmlspecialchars($c['nome_usuario']) ?>" class="profile-circle">
+            <?php else: ?>
+            <div class="profile-circle"></div>
+            <?php endif; ?>
 
-                            <div class="critic-header">
-                            <span class="star">★</span>
-                                <strong class="critic-name"><?= htmlspecialchars($c['nome_usuario']) ?></strong>
-                                </div>
-                                </div>
+            <div class="critic-header">
+                <span class="star">★</span>
+                <strong class="critic-name"><?= htmlspecialchars($c['nome_usuario']) ?></strong>
+            </div>
+        </div>
 
 <div class="critic-text">
     <p class="critic-film"><em><?= htmlspecialchars($c['nome_filme']) ?></em></p>
     <p class="critic-comment"><?= htmlspecialchars($c['conteudo']) ?></p>
     <p class="rating">Nota média: <strong><?= number_format($c['media_geral'], 1) ?></strong></p>
-    <p class="critic-date">Data: <?= date('d/m/Y', strtotime($c['data_comentario'])) ?></p>
 </div>
 
                     </div>

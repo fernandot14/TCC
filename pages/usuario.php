@@ -59,9 +59,9 @@ $conn->close();
         <div class="b">
 
         </div>
-        <div class="logo">
-            <img src="" alt="Logo Movie Reviews">   
-        </div>
+
+        <img src="../imagens/logo.png" alt="Logo do site" class="logo">
+        
         <nav>
             <a href="home.php" class="btn">home</a>
         </nav>
