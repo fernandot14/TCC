@@ -142,13 +142,13 @@ $comentarios = mysqli_query($conexao, $sqlComentarios);
 
         <section class="avaliacoes">
             <p>Avaliações:</p>
-            <div>🍅 Tomatoes: <?= $filme['media_tomatoes'] ?></div>
-            <div>🎬 IMDB: <?= $filme['media_imbd'] ?></div>
-            <div>⭐ MR: <?= $filme['media_geral'] ?></div>
+            <div> Tomatoes: <?= $filme['media_tomatoes'] ?></div>
+            <div> IMDB: <?= $filme['media_imbd'] ?></div>
+            <div><span class="comentario-estrela">★</span> MR: <?= $filme['media_geral'] ?></div>
         </section>
 
         <section class="media-final">
-            <p>MÉDIA FINAL: <span><?= $filme['media_geral'] ?> ⭐</span></p>
+            <p>MÉDIA FINAL: <span><?= $filme['media_geral'] ?> ★</span></p>
         </section>
 
         <section class="sinopse">
@@ -158,7 +158,7 @@ $comentarios = mysqli_query($conexao, $sqlComentarios);
 
        <section class="comentarios-section">
   <div class="comentarios-header">
-    <h3>⭐ Comentários</h3>
+    <h3>| Comentários</h3>
     <button class="btn-comentar">COMENTAR</button>
   </div>
 
@@ -168,8 +168,11 @@ $comentarios = mysqli_query($conexao, $sqlComentarios);
       <div class="comentario-card">
         <div class="comentario-topo">
           <img src="../imagens/default_user.png" alt="Usuário" class="comentario-avatar">
-          <span class="comentario-estrela">⭐</span>
+          <span class="comentario-estrela">★</span>
         </div>
+        
+        <p style= "font-size: 20px;" class="comentario-texto"><?= htmlspecialchars($comentario['nome_usuario']) ?></p>
+        <p style= "font-size: 12px;" class="comentario-texto"><?= htmlspecialchars($comentario['data_comentario']) ?></p>
         <p class="comentario-texto"><?= htmlspecialchars($comentario['conteudo']) ?></p>
       </div>
     <?php endforeach; ?>

@@ -37,6 +37,16 @@ foreign key (id_filme) references filme(id_filme),
 foreign key (id_usuario) references usuario(id_usuario)
 );
 
+drop table if exists nota;
+create table nota(
+id_nota int not null auto_increment primary key,
+id_usuario int not null,
+id_filme int not null,
+valor decimal (10,2),
+foreign key (id_usuario) references usuario(id_usuario),
+foreign key (id_filme) references filme(id_filme)
+);
+
 select * from usuario;
 
 insert into comentario (conteudo, data_comentario, id_usuario) values ('nossa, que ruim', '2007-01-03', 2);

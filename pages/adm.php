@@ -50,7 +50,7 @@ include '../conection/conexao.php';
                         <div class='user-item'>
                             <div class='icon'></div>
                             <span class='name'>".$row['nome_usuario']."</span>
-                            <a class='profile'>acessar perfil</a>
+                            <a class='profile' href='perfil_usuario.php?id=".$row['id_usuario']."'>acessar perfil</a>
                         </div>";
                     }
                     desconecta($con);
@@ -65,6 +65,8 @@ include '../conection/conexao.php';
     </section>
 
 </main>
+
+
 
 </body>
 </html>

@@ -1,10 +1,12 @@
 <?php
 session_start();
 
-
 include('../conection/conexao.php'); 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    $con = conecta(); // CRIA A CONEXÃO
+
     $nome = $_POST['nome_filme'];
     $data = $_POST['data_lancamento'];
     $genero = $_POST['genero'];
@@ -17,13 +19,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $sql = "INSERT INTO filme (nome_filme, data_lancamento, genero, trailer, caminho_imagem, media_tomatoes, media_imbd, media_geral, sinopse) 
             VALUES ('$nome', '$data', '$genero', '$trailer', '$caminho', '$tomatoes', '$imbd', '$geral', '$sinopse')";
-    
-    if (mysqli_query($conn, $sql)) {
+
+    if (mysqli_query($con, $sql)) {
         $mensagem = "Filme adicionado com sucesso!";
     } else {
-        $mensagem = "Erro ao adicionar: " . mysqli_error($conn);
+        $mensagem = "Erro ao adicionar: " . mysqli_error($con);
     }
+
+    desconecta($con);
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -100,7 +106,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
 
-<div class="top-bar"></div>
+<div class="top-bar">
+    <a href="../pages/home.php" class="icon-svg">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+            <path d="M3 10L12 3L21 10V21H14V14H10V21H3V10Z"/>
+        </svg>
+    </a>
+</div>
+
 
 <div class="container">
     <div class="form-box">
