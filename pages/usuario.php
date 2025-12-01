@@ -76,8 +76,8 @@ $conn->close();
     <!-- AÇÕES -->
     <div class="acoes">
         <a href="alterar_senha.php">Alterar senha</a>
-        <a href="#">Excluir conta</a>
-        <a href="#">Alterar nome</a>
+        <a href="confirmar_exclusao.php">Excluir conta</a>
+        <a href="alterar_nome.php">Alterar nome</a>
     </div>
 
     <!-- FAVORITOS -->

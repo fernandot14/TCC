@@ -283,3 +283,58 @@ footer .icons i {
 footer .icons i:hover {
     color: #8a2be2;
 }
+
+.avaliar-filme {
+    margin-top: 30px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 12px #a04bff;
+}
+
+.avaliar-filme h2 {
+    margin: 0 0 15px;
+    font-size: 22px;
+}
+
+.avaliar-filme label {
+    font-size: 16px;
+}
+
+.avaliar-filme select {
+    width: 140px;
+    padding: 8px;
+    border-radius: 8px;
+    border: 2px solid #a04bff;
+    background: black;
+    color: white;
+}
+
+.avaliar-filme button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #a04bff;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.avaliar-filme button:hover {
+    background: #c36fff;
+}
+
+.sua-nota {
+    margin-bottom: 10px;
+    color: #ffd700;
+    font-size: 18px;
+}
+
+.avaliar_container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

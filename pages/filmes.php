@@ -11,7 +11,7 @@ if (isset($_GET['busca'])) {
         echo "<script>alert('Digite algo para buscar.');</script>";
     } else {
        
-        $sqlBusca = "SELECT id_filme, nome_filme, data_lancamento, genero, trailer, caminho_imagem, media_tomatoes, media_imbd, media_geral, sinopse FROM filme WHERE nome_filme LIKE ? LIMIT 10";
+        $sqlBusca = "SELECT id_filme, nome_filme, data_lancamento, genero, trailer, caminho_imagem, media_tomatoes, media_imbd, sinopse FROM filme WHERE nome_filme LIKE ? LIMIT 10";
         $like = '%' . $busca . '%';
 
         if ($stmt = mysqli_prepare($conexao, $sqlBusca)) {
@@ -45,7 +45,7 @@ if (isset($_GET['busca'])) {
 
             // Se nenhum candidato via LIKE, procuramos todos e fazemos matching completo (fallback)
             if ($melhor === null) {
-                $sqlAll = "SELECT id_filme, nome_filme, data_lancamento, genero, trailer, caminho_imagem, media_tomatoes, media_imbd, media_geral, sinopse FROM filme";
+                $sqlAll = "SELECT id_filme, nome_filme, data_lancamento, genero, trailer, caminho_imagem, media_tomatoes, media_imbd, sinopse FROM filme";
                 $resAll = mysqli_query($conexao, $sqlAll);
                 while ($row = mysqli_fetch_assoc($resAll)) {
                     $nomeBanco = $row['nome_filme'];
@@ -81,14 +81,78 @@ if (isset($_GET['busca'])) {
 
 $id = $_SESSION['filme_id'];
 
-
 $sql = "SELECT * FROM filme WHERE id_filme = $id";
 $res = mysqli_query($conexao, $sql);
 $filme = mysqli_fetch_assoc($res);
 
+$notaUsuario = null;
+
+if (isset($_SESSION['id'])) {
+    $idUser = $_SESSION['id'];
+
+    $sqlNota = "SELECT valor FROM nota WHERE id_usuario = $idUser AND id_filme = $id";
+    $resNota = mysqli_query($conexao, $sqlNota);
+    $rowNota = mysqli_fetch_assoc($resNota);
+
+    if ($rowNota) {
+        $notaUsuario = $rowNota['valor'];
+    }
+}
+
+
+$sqlMr = "SELECT AVG(valor) AS mr FROM nota WHERE id_filme = ?";
+$stmtMr = $conexao->prepare($sqlMr);
+$stmtMr->bind_param("i", $id);
+$stmtMr->execute();
+$resultMr = $stmtMr->get_result();
+$mrRow = $resultMr->fetch_assoc();
+
+$mr = $mrRow['mr'] ?? 0; // caso não tenha notas, vira 0
+
+$imdb = $filme['media_imbd'];
+$tomatoes = $filme['media_tomatoes'];
+
+$media_geral = ($mr + $imdb + $tomatoes) / 3;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nota_filme'])) {
+
+    if (!isset($_SESSION['id'])) {
+        die("Você precisa estar logado para avaliar.");
+    }
+
+    $idUser = $_SESSION['id'];
+    $nota = floatval($_POST['nota_filme']);
+
+    // Se já existe a nota, atualiza
+    $sqlCheck = "SELECT id_nota FROM nota WHERE id_usuario = $idUser AND id_filme = $id";
+    $resCheck = mysqli_query($conexao, $sqlCheck);
+
+    if (mysqli_num_rows($resCheck) > 0) {
+        // update
+        $sqlUpdate = "UPDATE nota SET valor = $nota WHERE id_usuario = $idUser AND id_filme = $id";
+        mysqli_query($conexao, $sqlUpdate);
+    } else {
+        // insert
+        $sqlInsert = "INSERT INTO nota (id_usuario, id_filme, valor) VALUES ($idUser, $id, $nota)";
+        mysqli_query($conexao, $sqlInsert);
+    }
+
+    header("Location: filmes.php");
+    exit();
+}
+
+$sql_notas = "SELECT id_filme, id_usuario, valor FROM nota WHERE id_filme = $id";
+$result_notas = $conexao->query($sql_notas);
+
+$notas = [];
+while ($nota = $result_notas->fetch_assoc()) {
+    // Cria uma chave única com filme e usuário
+    $notas[$nota['id_filme'] . '_' . $nota['id_usuario']] = $nota['valor'];
+}
+
 
 $sqlComentarios = "
-SELECT c.conteudo, c.data_comentario, u.nome_usuario, u.foto_perfil 
+SELECT c.id_comentario, c.conteudo, c.data_comentario, u.nome_usuario, u.foto_perfil, c.id_filme, c.id_usuario, u.tipo
 FROM comentario c 
 JOIN usuario u ON c.id_usuario = u.id_usuario 
 WHERE c.id_filme = $id
@@ -145,12 +209,42 @@ $comentarios = mysqli_query($conexao, $sqlComentarios);
             <p>Avaliações:</p>
             <div> Tomatoes: <?= $filme['media_tomatoes'] ?></div>
             <div> IMDB: <?= $filme['media_imbd'] ?></div>
-            <div><span class="comentario-estrela">★</span> MR: <?= $filme['media_geral'] ?></div>
+            <div><span class="comentario-estrela">★</span> MR: <?php echo $mr ?></div>
+
         </section>
 
         <section class="media-final">
-            <p>MÉDIA FINAL: <span><?= $filme['media_geral'] ?> ★</span></p>
+            <p>MÉDIA FINAL: <span> <?php echo $media_geral ?> </span></p>
         </section>
+
+        <?php if (isset($_SESSION['id'])): ?>
+
+<div class = "avaliar_container">
+<section class="avaliar-filme">
+    <h2>Avalie este filme</h2>
+
+    <?php if ($notaUsuario !== null): ?>
+        <p class="sua-nota">Sua nota: <strong><?= $notaUsuario ?></strong> ★</p>
+    <?php endif; ?>
+
+    <form method="POST">
+        <label for="nota">Escolha sua nota:</label>
+
+        <select name="nota_filme" id="nota" required>
+            <?php 
+            for ($i = 0; $i <= 5; $i += 0.5) {
+                $sel = ($notaUsuario == $i) ? "selected" : "";
+                echo "<option value='$i' $sel>$i ★</option>";
+            }
+            ?>
+        </select>
+
+        <button type="submit">Salvar Nota</button>
+    </form>
+</section>
+</div>
+<?php endif; ?>
+
 
         <section class="sinopse">
             <h2>Sinopse</h2>
@@ -171,12 +265,21 @@ $comentarios = mysqli_query($conexao, $sqlComentarios);
       <div class="comentario-card">
         <div class="comentario-topo">
           <img src="../imagens/default_user.png" alt="Usuário" class="comentario-avatar">
-          <span class="comentario-estrela">★</span>
+          <?php if ($comentario['tipo'] == "critico") echo '<span class="comentario-estrela">★</span>' ?>
         </div>
         
         <p style= "font-size: 20px;" class="comentario-texto"><?= htmlspecialchars($comentario['nome_usuario']) ?></p>
         <p style= "font-size: 12px;" class="comentario-texto"><?= htmlspecialchars($comentario['data_comentario']) ?></p>
         <p class="comentario-texto"><?= htmlspecialchars($comentario['conteudo']) ?></p>
+        <?php
+            $chave = $comentario['id_filme'] . '_' . $comentario['id_usuario'];
+            if (isset($notas[$chave])):
+        ?>
+            <p class="rating" style= "font-size: 15px; color: black;" class="comentario-texto"><strong>Nota atribuída:</strong> <?= $notas[$chave] ?></p>
+        <?php else: ?>
+            <p class="rating" style= "font-size: 15px; color: black;" class="comentario-texto" ><em>Esse usuário não atribuiu nota a esse filme.</em></p>
+        <?php endif; ?>
+
       </div>
     <?php endforeach; ?>
   </div>

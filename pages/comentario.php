@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <textarea name="conteudo" placeholder="Digite seu comentário..." required></textarea>
 
         <button type="submit">Enviar</button>
-        <a href="filme.php" class="cancelar">Cancelar</a>
+        <a href="filmes.php" class="cancelar">Cancelar</a>
     </form>
 
 </div>

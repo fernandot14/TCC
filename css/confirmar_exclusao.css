@@ -1,0 +1,36 @@
+body {
+    background-color: #111;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.container {
+    margin-top: 150px;
+}
+
+button.confirmar {
+    background-color: red;
+    padding: 10px 20px;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+button.confirmar:hover {
+    background-color: darkred;
+}
+
+a.cancelar {
+    display: inline-block;
+    margin-top: 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+a.cancelar:hover {
+    text-decoration: underline;
+}

@@ -12,7 +12,7 @@ if (isset($_GET['busca'])) {
         echo "<script>alert('Digite algo para buscar.');</script>";
     } else {
        
-        $sqlBusca = "SELECT id_filme, nome_filme, data_lancamento, genero, trailer, caminho_imagem, media_tomatoes, media_imbd, media_geral, sinopse FROM filme WHERE nome_filme LIKE ? LIMIT 10";
+        $sqlBusca = "SELECT id_filme, nome_filme, data_lancamento, genero, trailer, caminho_imagem, media_tomatoes, media_imbd, sinopse FROM filme WHERE nome_filme LIKE ? LIMIT 10";
         $like = '%' . $busca . '%';
 
         if ($stmt = mysqli_prepare($conexao, $sqlBusca)) {
@@ -46,7 +46,7 @@ if (isset($_GET['busca'])) {
 
             // Se nenhum candidato via LIKE, procuramos todos e fazemos matching completo (fallback)
             if ($melhor === null) {
-                $sqlAll = "SELECT id_filme, nome_filme, data_lancamento, genero, trailer, caminho_imagem, media_tomatoes, media_imbd, media_geral, sinopse FROM filme";
+                $sqlAll = "SELECT id_filme, nome_filme, data_lancamento, genero, trailer, caminho_imagem, media_tomatoes, media_imbd, sinopse FROM filme";
                 $resAll = mysqli_query($conexao, $sqlAll);
                 while ($row = mysqli_fetch_assoc($resAll)) {
                     $nomeBanco = $row['nome_filme'];
@@ -79,25 +79,22 @@ if (isset($_GET['busca'])) {
     }
 }
 
-
-$sqlTop5 = "SELECT nome_filme, caminho_imagem, media_geral FROM filme ORDER BY media_geral DESC LIMIT 5";
-$topFilmes = mysqli_query($conexao, $sqlTop5);
-
 // Comentários de críticos (usuários com tipo 'critico')
 $sqlCriticos = "
-SELECT 
-    u.nome_usuario, 
-    u.foto_perfil, 
-    f.nome_filme, 
-    f.media_geral, 
-    c.conteudo, 
-    c.data_comentario
-FROM comentario AS c
-INNER JOIN usuario AS u ON c.id_usuario = u.id_usuario
-INNER JOIN filme AS f ON c.id_filme = f.id_filme
-WHERE LOWER(TRIM(u.tipo)) = 'critico'
-ORDER BY c.data_comentario DESC
-LIMIT 5
+    SELECT 
+        c.id_comentario, 
+        c.conteudo, 
+        c.data_comentario, 
+        c.id_filme, 
+        c.id_usuario, 
+        f.nome_filme,
+        u.nome_usuario,
+        u.foto_perfil
+    FROM comentario c
+    INNER JOIN usuario u ON c.id_usuario = u.id_usuario
+    LEFT JOIN filme f ON c.id_filme = f.id_filme
+    WHERE LOWER(TRIM(u.tipo)) = 'critico'
+    ORDER BY c.data_comentario DESC
 ";
 $comentariosCriticos = mysqli_query($conexao, $sqlCriticos);
 
@@ -115,6 +112,14 @@ if (mysqli_num_rows($comentariosCriticos) > 0) {
     mysqli_data_seek($comentariosCriticos, 0);
 }
 
+$sql_notas = "SELECT id_filme, id_usuario, valor FROM nota";
+$result_notas = $conexao->query($sql_notas);
+
+$notas = [];
+while ($nota = $result_notas->fetch_assoc()) {
+    // Cria uma chave única com filme e usuário
+    $notas[$nota['id_filme'] . '_' . $nota['id_usuario']] = $nota['valor'];
+}
 
 
 // Sugestões de filmes
@@ -194,7 +199,15 @@ $sugestoes = mysqli_query($conexao, $sqlSugestoes);
 <div class="critic-text">
     <p class="critic-film"><em><?= htmlspecialchars($c['nome_filme']) ?></em></p>
     <p class="critic-comment"><?= htmlspecialchars($c['conteudo']) ?></p>
-    <p class="rating">Nota média: <strong><?= number_format($c['media_geral'], 1) ?></strong></p>
+    <?php
+            $chave = $c['id_filme'] . '_' . $c['id_usuario'];
+            if (isset($notas[$chave])):
+    ?>
+            <p class="rating"><strong>Nota atribuída:</strong> <?= $notas[$chave] ?></p>
+        <?php else: ?>
+            <p class="rating"><em>Esse usuário não atribuiu nota a esse filme.</em></p>
+        <?php endif; ?>
+
 </div>
 
                     </div>

@@ -14,11 +14,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $caminho = $_POST['caminho_imagem'];
     $tomatoes = $_POST['media_tomatoes'];
     $imbd = $_POST['media_imbd'];
-    $geral = $_POST['media_geral'];
     $sinopse = $_POST['sinopse'];
 
-    $sql = "INSERT INTO filme (nome_filme, data_lancamento, genero, trailer, caminho_imagem, media_tomatoes, media_imbd, media_geral, sinopse) 
-            VALUES ('$nome', '$data', '$genero', '$trailer', '$caminho', '$tomatoes', '$imbd', '$geral', '$sinopse')";
+    $sql = "INSERT INTO filme (nome_filme, data_lancamento, genero, trailer, caminho_imagem, media_tomatoes, media_imbd, sinopse) 
+            VALUES ('$nome', '$data', '$genero', '$trailer', '$caminho', '$tomatoes', '$imbd', '$sinopse')";
 
     if (mysqli_query($con, $sql)) {
         $mensagem = "Filme adicionado com sucesso!";
@@ -137,8 +136,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="number" step="0.01" name="media_tomatoes" placeholder="Média Rotten Tomatoes" required>
 
             <input type="number" step="0.01" name="media_imbd" placeholder="Média IMDB" required>
-
-            <input type="number" step="0.01" name="media_geral" placeholder="Média Geral" required>
 
             <textarea name="sinopse" rows="5" placeholder="Sinopse do Filme" required></textarea>
 

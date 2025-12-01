@@ -1,0 +1,72 @@
+body {
+    background: #e6e6e6;
+    font-family: Arial, sans-serif;
+    margin: 0;            
+    padding: 0;
+}
+
+.top-bar {
+    width: 100%;
+    height: 60px;
+    background-color: #1c1c1c;
+    display: flex;
+    align-items: center;
+    padding: 0;               
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+
+.top-bar .icon-svg {
+    margin-left: auto;
+    margin-right: 30px;     
+    display: flex;
+    align-items: center;
+}
+
+
+.home-icon {
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+}
+
+
+.container {
+    width: 600px;
+    margin: 120px auto 60px auto;   
+    padding: 25px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+h2 {
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+td, th {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.btn-delete {
+    background: #7c3aed;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-delete:hover {
+    background: #7c3aed;
+}

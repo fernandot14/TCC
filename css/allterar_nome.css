@@ -1,0 +1,100 @@
+body {
+background: #0f0f0f;
+color: #fff;
+font-family: Arial, Helvetica, sans-serif;
+margin: 0;
+padding: 0;
+}
+
+header {
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 12px 20px;
+border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+
+
+nav .btn {
+color: #fff;
+text-decoration: none;
+margin-left: 12px;
+padding: 6px 10px;
+border-radius: 6px;
+background: rgba(255,255,255,0.04);
+}
+
+.container {
+max-width: 400px;
+margin: 80px auto;
+padding: 30px;
+background: #0f0f0f;
+border: 1px solid rgba(255,255,255,0.1);
+border-radius: 12px;
+box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+text-align: center;
+}
+
+h1 {
+margin-top: 0;
+margin-bottom: 24px;
+font-size: 24px;
+}
+
+.form-nome input[type="text"] {
+width: 100%;
+padding: 12px;
+margin-bottom: 16px;
+border-radius: 8px;
+border: 1px solid rgba(255,255,255,0.3);
+background: #1a1a1a;
+color: #fff;
+font-size: 16px;
+box-sizing: border-box;
+}
+
+.botoes {
+display: flex;
+flex-direction: column;
+gap: 12px;
+align-items: center;
+}
+
+.btn-confirm {
+background: #7c3aed;
+border: none;
+padding: 12px 24px;
+border-radius: 30px;
+cursor: pointer;
+font-size: 16px;
+color: #fff;
+width: 100%;
+}
+
+.btn-confirm:hover {
+filter: brightness(0.9);
+}
+
+.btn-cancel {
+color: #7c3aed;
+text-decoration: none;
+font-size: 14px;
+margin-top: 8px;
+}
+
+.msg {
+padding: 10px 12px;
+border-radius: 8px;
+margin-bottom: 16px;
+}
+
+.msg.erro {
+background: #ff4d4f;
+color: #fff;
+}
+
+.msg.sucesso {
+background: #2fbf71;
+color: #fff;
+}

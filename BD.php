@@ -12,7 +12,6 @@ trailer varchar(150),
 caminho_imagem varchar(150),
 media_tomatoes decimal(10,2) NOT NULL,
 media_imbd decimal (10,2) not null,
-media_geral decimal (10,2) not null,
 sinopse varchar(500) not null
 );
 
