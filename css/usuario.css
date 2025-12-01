@@ -96,6 +96,23 @@ nav a:hover {
             color: #fff;
         }
 
+        .button_excluir {
+            background: transparent;
+            color: #b58eff;
+            border: 2px solid #b58eff;
+            border-radius: 20px;
+            padding: 8px 20px;
+            text-decoration: none;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .button_excluir:hover {
+            background: #b58eff;
+            color: #fff;
+        }
+
+
         /* Favoritos */
         .favoritos {
             padding: 20px 60px;

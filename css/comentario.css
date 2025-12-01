@@ -1,0 +1,47 @@
+body {
+    background: #0b0b0b;
+    color: white;
+    font-family: Arial;
+}
+
+.coment-box {
+    width: 500px;
+    background: #1a1a1a;
+    margin: 80px auto;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px #a04bff;
+}
+
+.coment-box h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+textarea {
+    width: 100%;
+    height: 120px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #a04bff;
+    font-size: 16px;
+    resize: none;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #a04bff;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.cancelar {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    color: #ccc;
+}

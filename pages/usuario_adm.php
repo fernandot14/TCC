@@ -3,12 +3,7 @@ session_start();
 require_once '../conection/conexao.php';
 
 
-if (!isset($_SESSION['id'])) {
-    header("Location: ../login.php");
-    exit;
-}
-
-$id_usuario = $_SESSION['id'];
+$id_usuario = $_SESSION['id_adm'];
 $conn = conecta();
 
 
@@ -63,7 +58,7 @@ $conn->close();
         <img src="../imagens/logo.png" alt="Logo do site" class="logo">
         
         <nav>
-            <a href="home.php" class="btn">home</a>
+            <a href="adm.php" class="btn">ADM</a>
         </nav>
     </header>
 
@@ -75,9 +70,8 @@ $conn->close();
 
     <!-- AÇÕES -->
     <div class="acoes">
-        <a href="alterar_senha.php">Alterar senha</a>
+        <a href="#">promover</a>
         <a href="#">Excluir conta</a>
-        <a href="#">Alterar nome</a>
     </div>
 
     <!-- FAVORITOS -->
@@ -94,7 +88,7 @@ $conn->close();
     </section>
 
     <!-- COMENTÁRIOS -->
-    <section class="comentarios">
+ <section class="comentarios">
     <h2>Comentários anteriores</h2>
 
     <?php if ($result_coment->num_rows > 0): ?>
@@ -108,9 +102,9 @@ $conn->close();
                 </div>
 
                 <!-- Botão Excluir -->
-                <form action="comentario_excluir.php" method="POST" class="excluir-form">
+                <form action="comentario_excluir_adm.php" method="POST" class="excluir-form">
                     <input type="hidden" name="id_comentario" value="<?= $coment['id_comentario'] ?>">
-                    <button class="button_excluir" type="submit" onclick="return confirm('Tem certeza que deseja excluir este comentário?')">
+                    <button class="button_excluir" type="submit">
                         Excluir
                     </button>
                 </form>
@@ -121,8 +115,6 @@ $conn->close();
         <p>Você ainda não fez comentários.</p>
     <?php endif; ?>
 </section>
-
-
 
 </body>
 </html>

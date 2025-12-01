@@ -91,7 +91,8 @@ $sqlComentarios = "
 SELECT c.conteudo, c.data_comentario, u.nome_usuario, u.foto_perfil 
 FROM comentario c 
 JOIN usuario u ON c.id_usuario = u.id_usuario 
-WHERE c.id_filme = $id";
+WHERE c.id_filme = $id
+ORDER BY c.data_comentario DESC";
 $comentarios = mysqli_query($conexao, $sqlComentarios);
 ?>
 <!DOCTYPE html>
@@ -159,7 +160,9 @@ $comentarios = mysqli_query($conexao, $sqlComentarios);
        <section class="comentarios-section">
   <div class="comentarios-header">
     <h3>| Comentários</h3>
-    <button class="btn-comentar">COMENTAR</button>
+     <?php if ($_SESSION['login']): ?>
+        <a href="comentario.php?id=<?= $filme['id_filme'] ?>" class="btn-comentar">COMENTAR</a> 
+     <?php endif; ?>
   </div>
 
   <div class="comentarios-container">
