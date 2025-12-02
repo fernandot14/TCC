@@ -4,6 +4,26 @@ session_start();
 require_once '../conection/conexao.php';
 $conexao = conecta(); 
 
+$sqlTop5 = "
+    SELECT 
+        f.id_filme,
+        f.nome_filme,
+        f.caminho_imagem,
+        AVG(n.valor) AS media_mr
+    FROM filme f
+    LEFT JOIN nota n ON n.id_filme = f.id_filme
+    GROUP BY f.id_filme
+    ORDER BY media_mr DESC
+    LIMIT 5
+";
+
+$resultTop5 = mysqli_query($conexao, $sqlTop5);
+$top5 = [];
+
+while($linha = mysqli_fetch_assoc($resultTop5)){
+    $top5[] = $linha;
+}
+
 
 if (isset($_GET['busca'])) {
     $busca = trim($_GET['busca']);
@@ -166,13 +186,16 @@ $sugestoes = mysqli_query($conexao, $sqlSugestoes);
     <main>
         <section class="top-filmes">
             <h2>|  Top 5 no Movie Reviews</h2>
-            <div class="retangulos-top5">
-                <div class="retangulo"></div>
-                <div class="retangulo"></div>
-                <div class="retangulo"></div>
-                <div class="retangulo"></div>
-                <div class="retangulo"></div>
-            </div>
+    <div class="retangulos-top5">
+    <?php foreach ($top5 as $f): ?>
+        <a href="set_filme.php?id=<?= $f['id_filme'] ?>">
+            <img src="<?= $f['caminho_imagem'] ?>" 
+                 alt="<?= htmlspecialchars($f['nome_filme']) ?>" 
+                 style="width:150px; height:200px; border-radius:8px;">
+        </a>
+    <?php endforeach; ?>
+</div>
+
 
         </section>
 
@@ -237,6 +260,8 @@ $sugestoes = mysqli_query($conexao, $sqlSugestoes);
 
     <footer>
         <p>Copyright © Movie Reviews</p>
+        <img src="../imagens/Marca_IFSP_2015_Bri_H_4.png" alt="" style = "width: 100px;
+    height: auto;" >
         <div class="redes">
             <a href="#"><img src="../imagens/instagram.png" alt="instagram"></a>
             <a href="#"><img src="../imagens/Youtube.png" alt="youtube"></a>

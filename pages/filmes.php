@@ -301,12 +301,7 @@ $comentarios = mysqli_query($conexao, $sqlComentarios);
     </main>
 
     <footer>
-        <p>Copyright ©</p>
-        <div class="icons">
-            <i class="fa fa-instagram"></i>
-            <i class="fa fa-youtube"></i>
-            <i class="fa fa-facebook"></i>
-        </div>
+        <p>Copyright © Movie Reviews</p>
     </footer>
 </body>
 </html>
