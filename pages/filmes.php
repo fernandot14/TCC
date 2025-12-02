@@ -150,6 +150,10 @@ while ($nota = $result_notas->fetch_assoc()) {
     $notas[$nota['id_filme'] . '_' . $nota['id_usuario']] = $nota['valor'];
 }
 
+function extrairIdYoutube($url) {
+    preg_match('/(?:v=|youtu\.be\/)([^&]+)/', $url, $match);
+    return $match[1] ?? '';
+}
 
 $sqlComentarios = "
 SELECT c.id_comentario, c.conteudo, c.data_comentario, u.nome_usuario, u.foto_perfil, c.id_filme, c.id_usuario, u.tipo
@@ -198,12 +202,16 @@ $comentarios = mysqli_query($conexao, $sqlComentarios);
             <p class="data"><?= date('d/m/Y', strtotime($filme['data_lancamento'])) ?></p>
         </section>
 
-        <section class="midias">
-            <img src="<?= $filme['caminho_imagem'] ?>" alt="Capa" class="capa">
-            <video controls class="trailer">
-                <source src="<?= $filme['trailer'] ?>" type="video/mp4">
-            </video>
-        </section>
+    <section class="midias">
+    <img src="<?= $filme['caminho_imagem'] ?>" alt="Capa" class="capa">
+
+        <iframe class="trailer"
+            src="https://www.youtube.com/embed/<?= extrairIdYoutube($filme['trailer']) ?>"
+            frameborder="0"
+            allowfullscreen>
+        </iframe>
+    </section>
+
 
         <section class="avaliacoes">
             <p>Avaliações:</p>

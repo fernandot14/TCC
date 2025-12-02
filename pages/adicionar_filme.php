@@ -5,31 +5,44 @@ include('../conection/conexao.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    $con = conecta(); // CRIA A CONEXÃO
+    $con = conecta();
 
     $nome = $_POST['nome_filme'];
     $data = $_POST['data_lancamento'];
     $genero = $_POST['genero'];
     $trailer = $_POST['trailer'];
-    $caminho = $_POST['caminho_imagem'];
     $tomatoes = $_POST['media_tomatoes'];
     $imbd = $_POST['media_imbd'];
     $sinopse = $_POST['sinopse'];
 
-    $sql = "INSERT INTO filme (nome_filme, data_lancamento, genero, trailer, caminho_imagem, media_tomatoes, media_imbd, sinopse) 
-            VALUES ('$nome', '$data', '$genero', '$trailer', '$caminho', '$tomatoes', '$imbd', '$sinopse')";
+    // ======== PROCESSAR A IMAGEM =========
+    $pastaDestino = "../imagens/";
+    $imagemNome = basename($_FILES["imagem_filme"]["name"]);
+    $caminhoCompleto = $pastaDestino . $imagemNome;
 
-    if (mysqli_query($con, $sql)) {
-        $mensagem = "Filme adicionado com sucesso!";
+    // mover para pasta ../imagens
+    if (move_uploaded_file($_FILES["imagem_filme"]["tmp_name"], $caminhoCompleto)) {
+
+        // salvar caminho no banco
+        $sql = "INSERT INTO filme 
+                (nome_filme, data_lancamento, genero, trailer, caminho_imagem, media_tomatoes, media_imbd, sinopse) 
+                VALUES 
+                ('$nome', '$data', '$genero', '$trailer', '$caminhoCompleto', '$tomatoes', '$imbd', '$sinopse')";
+
+        if (mysqli_query($con, $sql)) {
+            $mensagem = "Filme adicionado com sucesso!";
+        } else {
+            $mensagem = "Erro ao adicionar ao banco: " . mysqli_error($con);
+        }
+
     } else {
-        $mensagem = "Erro ao adicionar: " . mysqli_error($con);
+        $mensagem = "Erro ao enviar a imagem.";
     }
 
     desconecta($con);
 }
-
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -116,31 +129,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <div class="container">
     <div class="form-box">
-        <h2>Adicionar Filme</h2>
+    <h2>Adicionar Filme</h2>
 
-        <?php if (!empty($mensagem)) echo "<p class='msg'>$mensagem</p>"; ?>
+    <?php if (!empty($mensagem)) echo "<p class='msg'>$mensagem</p>"; ?>
 
-        <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
 
-            <input type="text" name="nome_filme" placeholder="Nome do Filme" required>
+        <input type="text" name="nome_filme" placeholder="Nome do Filme" required>
 
-            <label>Data de Lançamento:</label>
-            <input type="date" name="data_lancamento" required>
+        <label>Data de Lançamento:</label>
+        <input type="date" name="data_lancamento" required>
 
-            <input type="text" name="genero" placeholder="Gênero" required>
+        <input type="text" name="genero" placeholder="Gênero" required>
 
-            <input type="text" name="trailer" placeholder="Link do Trailer (URL)">
+        <input type="text" name="trailer" placeholder="Link do Trailer (URL)">
 
-            <input type="text" name="caminho_imagem" placeholder="URL da Imagem do Filme">
+        <label>Enviar Imagem do Filme:</label>
+        <input type="file" name="imagem_filme" required>
 
-            <input type="number" step="0.01" name="media_tomatoes" placeholder="Média Rotten Tomatoes" required>
+        <input type="number" step="0.01" name="media_tomatoes" placeholder="Média Rotten Tomatoes" required>
 
-            <input type="number" step="0.01" name="media_imbd" placeholder="Média IMDB" required>
+        <input type="number" step="0.01" name="media_imbd" placeholder="Média IMDB" required>
 
-            <textarea name="sinopse" rows="5" placeholder="Sinopse do Filme" required></textarea>
+        <textarea name="sinopse" rows="5" placeholder="Sinopse do Filme" required></textarea>
 
-            <button type="submit">Salvar Filme</button>
-        </form>
+        <button type="submit">Salvar Filme</button>
+    </form>
+
     </div>
 </div>
 
