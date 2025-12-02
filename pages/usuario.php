@@ -72,11 +72,14 @@ $conn->close();
     
     <section class="perfil">
         <img src="<?= $foto_perfil ? $foto_perfil : '../imagens/default_user.png' ?>" alt="Foto do usuário">
+        <div style = "display: flex; flex-direction: column;">
         <h1><?= htmlspecialchars($nome_usuario) ?> 
         <?php if($tipo == "critico"): ?>
             <span style = "color: gold;">★</span>
         <?php endif; ?>
-       </h1>
+        </h1>
+        <h2> <?= htmlspecialchars($email) ?></h2>
+        </div>
     </section>
 
     <!-- AÇÕES -->

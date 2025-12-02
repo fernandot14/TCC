@@ -7,7 +7,7 @@ $id_usuario = $_SESSION['id_adm'];
 $conn = conecta();
 
 
-$sql = "SELECT nome_usuario, foto_perfil, tipo  FROM usuario WHERE id_usuario = ?";
+$sql = "SELECT nome_usuario, foto_perfil, tipo, email  FROM usuario WHERE id_usuario = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $id_usuario);
 $stmt->execute();
@@ -18,6 +18,7 @@ if ($result->num_rows > 0) {
     $nome_usuario = $usuario['nome_usuario'];
     $foto_perfil = $usuario['foto_perfil'];
     $tipo = $usuario['tipo'];
+    $email = $usuario['email'];
 } else {
     $nome_usuario = "Usuário não encontrado";
     $foto_perfil = null;
@@ -66,7 +67,10 @@ $conn->close();
     
     <section class="perfil">
         <img src="<?= $foto_perfil ? $foto_perfil : '../imagens/default_user.png' ?>" alt="Foto do usuário">
+        <div style = "display: flex; flex-direction: column;">
         <h1> <?= htmlspecialchars($nome_usuario) ?> (<?= htmlspecialchars($tipo) ?>) </h1> 
+        <h2> <?= htmlspecialchars($email) ?></h2>
+        </div>
     </section>
 
    
