@@ -12,7 +12,7 @@ $id_usuario = $_SESSION['id'];
 $conn = conecta();
 
 
-$sql = "SELECT nome_usuario, foto_perfil FROM usuario WHERE id_usuario = ?";
+$sql = "SELECT nome_usuario, foto_perfil, email, tipo FROM usuario WHERE id_usuario = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $id_usuario);
 $stmt->execute();
@@ -22,6 +22,8 @@ if ($result->num_rows > 0) {
     $usuario = $result->fetch_assoc();
     $nome_usuario = $usuario['nome_usuario'];
     $foto_perfil = $usuario['foto_perfil'];
+    $email = $usuario['email'];
+    $tipo = $usuario['tipo'];
 } else {
     $nome_usuario = "Usuário não encontrado";
     $foto_perfil = null;
@@ -70,7 +72,11 @@ $conn->close();
     
     <section class="perfil">
         <img src="<?= $foto_perfil ? $foto_perfil : '../imagens/default_user.png' ?>" alt="Foto do usuário">
-        <h1><?= htmlspecialchars($nome_usuario) ?></h1>
+        <h1><?= htmlspecialchars($nome_usuario) ?> 
+        <?php if($tipo == "critico"): ?>
+            <span style = "color: gold;">★</span>
+        <?php endif; ?>
+       </h1>
     </section>
 
     <!-- AÇÕES -->

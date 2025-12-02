@@ -66,12 +66,10 @@ $conn->close();
     
     <section class="perfil">
         <img src="<?= $foto_perfil ? $foto_perfil : '../imagens/default_user.png' ?>" alt="Foto do usuário">
-        <h1> <?= htmlspecialchars($nome_usuario) ?> </h1> 
+        <h1> <?= htmlspecialchars($nome_usuario) ?> (<?= htmlspecialchars($tipo) ?>) </h1> 
     </section>
 
-    <section> 
-        <h2>O usuario é: <?= htmlspecialchars($tipo) ?></h2>
-    </section>
+   
 
     <!-- AÇÕES -->
     <div class="acoes">

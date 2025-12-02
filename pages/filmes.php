@@ -112,7 +112,7 @@ $mr = $mrRow['mr'] ?? 0; // caso não tenha notas, vira 0
 $imdb = $filme['media_imbd'];
 $tomatoes = $filme['media_tomatoes'];
 
-$media_geral = ($mr + $imdb + $tomatoes) / 3;
+$media_geral = ($mr + $imdb*0.5 + $tomatoes) / 3;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nota_filme'])) {
 
@@ -156,7 +156,7 @@ function extrairIdYoutube($url) {
 }
 
 $sqlComentarios = "
-SELECT c.id_comentario, c.conteudo, c.data_comentario, u.nome_usuario, u.foto_perfil, c.id_filme, c.id_usuario, u.tipo
+SELECT c.id_comentario, c.conteudo, c.data_comentario, u.nome_usuario, u.foto_perfil, c.id_filme, c.id_usuario, u.tipo, u.email
 FROM comentario c 
 JOIN usuario u ON c.id_usuario = u.id_usuario 
 WHERE c.id_filme = $id
@@ -277,6 +277,9 @@ $comentarios = mysqli_query($conexao, $sqlComentarios);
         </div>
         
         <p style= "font-size: 20px;" class="comentario-texto"><?= htmlspecialchars($comentario['nome_usuario']) ?></p>
+        <?php if ($_SESSION['tipo'] == "ADM"): ?> 
+        <p style= "font-size: 12px;" class="comentario-texto"><?= htmlspecialchars($comentario['email']) ?></p> 
+        <?php endif; ?>
         <p style= "font-size: 12px;" class="comentario-texto"><?= htmlspecialchars($comentario['data_comentario']) ?></p>
         <p class="comentario-texto"><?= htmlspecialchars($comentario['conteudo']) ?></p>
         <?php

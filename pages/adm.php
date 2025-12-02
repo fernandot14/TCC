@@ -57,7 +57,32 @@ include '../conection/conexao.php';
                 }
             ?>
         </div>
+
     </section>
+
+   <section class="middle-box">
+    <h2>ÚLTIMOS 20 USUÁRIOS</h2>
+
+    <div class="recent-users">
+        <?php
+            $con = conecta();
+            $sqlLast = "SELECT id_usuario, nome_usuario, email, tipo FROM usuario ORDER BY id_usuario DESC LIMIT 20";
+            $resLast = mysqli_query($con, $sqlLast);
+
+            while ($u = mysqli_fetch_assoc($resLast)) {
+                echo "
+                <div class='user-item'>
+                    <span class='name'>".$u['nome_usuario']."</span>
+                    <span class='email'>".$u['email']."</span>
+                    <span class='tipo'>Tipo: ".$u['tipo']."</span>
+                    <a class='profile' href='set_id_adm.php?id=".$u['id_usuario']."'>acessar perfil</a>
+                </div>";
+            }
+            desconecta($con);
+        ?>
+    </div>
+</section>
+
 
     <section class="right-box">
         <button onclick="location.href='adicionar_filme.php'">ADICIONAR FILME</button>
