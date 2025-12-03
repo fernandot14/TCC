@@ -26,3 +26,5 @@ function desconecta($conexao)
 }
 
 ?>
+
+final
