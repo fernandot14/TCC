@@ -89,7 +89,7 @@ if (!$id_user) {
 
         <button type="submit">Salvar Alterações</button>
 
-        <a href="home.php" class="cancelar">Cancelar</a>
+        <a href="usuario_adm.php" class="cancelar">Cancelar</a>
     </form>
 
 </div>

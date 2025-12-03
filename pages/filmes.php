@@ -225,7 +225,7 @@ $comentarios = mysqli_query($conexao, $sqlComentarios);
             <p>MÉDIA FINAL: <span> <?php echo $media_geral ?> </span></p>
         </section>
 
-        <?php if (isset($_SESSION['id'])): ?>
+        <?php if (($_SESSION['login'])): ?>
 
 <div class = "avaliar_container">
 <section class="avaliar-filme">

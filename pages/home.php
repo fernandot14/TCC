@@ -114,7 +114,7 @@ $sqlCriticos = "
     INNER JOIN usuario u ON c.id_usuario = u.id_usuario
     LEFT JOIN filme f ON c.id_filme = f.id_filme
     WHERE LOWER(TRIM(u.tipo)) = 'critico'
-    ORDER BY c.data_comentario DESC
+    ORDER BY c.id_comentario DESC LIMIT 5
 ";
 $comentariosCriticos = mysqli_query($conexao, $sqlCriticos);
 
